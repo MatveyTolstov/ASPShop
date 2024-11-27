@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<ShopHunter.Models.BDConn.Users>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="~/css/Css.css"> <!-- Исправил путь к файлу CSS -->
+</head>
+<body>
+<header class="head">
+    <div class="logo">
+        <h2>Hunter&Fish</h2>
+    </div>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li>
+                <a href="#">Новинки</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Shop")">Магазин</a>
+            </li>
+            <li>
+                <a href="#">Контакты</a>
+            </li>
+            <li>
+                <a href="#">О Нас</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<div class="container">
+    <h2>Список пользователей</h2>
+    <div>
+        <a class="btn btn-primary" asp-controller="Admin" asp-action="AddUser">Create</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Логин</th>
+            <th>Пароль</th>
+            <th>Роль</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model == null)
+        {
+            <p>No products available.</p>
+        }
+        else
+        {
+            @foreach (var users in Model)
+            {
+                <tr>
+                    <td>@users.ID_Users</td>
+                    <td>@users.Login</td>
+                    <td>@users.Password</td>
+                    <td>@users.Roles_ID</td>
+                    <td>
+                        <a class="btn btn-primary"  href="@Url.Action("EditUser","Admin", new { id = users.ID_Users })">Edit</a>
+                        <a class="btn btn-danger" onclick="return confirm('Вы точно хотите удалить')" href="@Url.Action("DeleteUser","Admin", new { id = users.ID_Users })">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

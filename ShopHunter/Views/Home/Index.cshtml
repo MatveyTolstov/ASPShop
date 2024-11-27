@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+@using System.Security.Claims
+@model List<ShopHunter.Models.BDConn.Product>
+@{
+    var countProduct = 0;
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Охота и Рыбалка</title>
+    <link rel="stylesheet" href="Css.css">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <h2>Hunter&Fish</h2>
+    </div>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li>
+                <a href="#New">Новинки</a>
+            </li>
+            <li>
+                <a href=@Url.Action("Shop")>Магазин</a>
+            </li>
+            <li>
+                <a href="#Contacts">Контакты</a>
+            </li>
+            <li>
+                <a href="#About">О Нас</a>
+            </li>
+        </ul>
+    </nav>
+
+    @if (ViewData["AuthUser"] != null)
+    {
+        var role = User.FindFirst(ClaimTypes.Role)?.Value;
+        if (role == "1")
+        {
+            <a href="@Url.Action("Admin")">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAASlJREFUSEvVleENgkAMhfs20UmUTXQSdRJxEnUS3aT6TI9ALVdC5IeXEH5c6Ne+vhbIwgcLx5dJAFVdichZRLYi8rTnBOCWJZgCVHVnwX0sgi4AjjVIFaCqzPhqAZjx0aoh9GCV7GuVZADKwmCf4P1Me5XdADRjVWSAh4hQ/zUAStIdq4T3TwDrnwMYUFWVb7zLmwug/uxDJBElYx9aAPu5AMrzkaE4xjWZcZvZTTYZSqZRknRQO9um5cNFBy2b1Ow+synl2Vijo0lmb+61aQ4BNsEcMjZ5yiEonOgvgFsPox9aX5gArUorh46KAGV6q/52Buh2k5/qAWDqfvGaOZcNhtIDynJL/R1AyuYdLD8PGF1uWafHlp8HpMurBoqWX/pHyzLP7v8f8AItqJ4Z7RA2xgAAAABJRU5ErkJggg=="/>
+            </a>
+        }
+        else if (role == "2")
+        {
+            <a href="@Url.Action("Manager")">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAASlJREFUSEvVleENgkAMhfs20UmUTXQSdRJxEnUS3aT6TI9ALVdC5IeXEH5c6Ne+vhbIwgcLx5dJAFVdichZRLYi8rTnBOCWJZgCVHVnwX0sgi4AjjVIFaCqzPhqAZjx0aoh9GCV7GuVZADKwmCf4P1Me5XdADRjVWSAh4hQ/zUAStIdq4T3TwDrnwMYUFWVb7zLmwug/uxDJBElYx9aAPu5AMrzkaE4xjWZcZvZTTYZSqZRknRQO9um5cNFBy2b1Ow+synl2Vijo0lmb+61aQ4BNsEcMjZ5yiEonOgvgFsPox9aX5gArUorh46KAGV6q/52Buh2k5/qAWDqfvGaOZcNhtIDynJL/R1AyuYdLD8PGF1uWafHlp8HpMurBoqWX/pHyzLP7v8f8AItqJ4Z7RA2xgAAAABJRU5ErkJggg=="/>
+            </a>
+        }
+    }
+    else
+    {
+        <div class="shop-icon">
+            <a href="@Url.Action("SignIn")">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAASlJREFUSEvVleENgkAMhfs20UmUTXQSdRJxEnUS3aT6TI9ALVdC5IeXEH5c6Ne+vhbIwgcLx5dJAFVdichZRLYi8rTnBOCWJZgCVHVnwX0sgi4AjjVIFaCqzPhqAZjx0aoh9GCV7GuVZADKwmCf4P1Me5XdADRjVWSAh4hQ/zUAStIdq4T3TwDrnwMYUFWVb7zLmwug/uxDJBElYx9aAPu5AMrzkaE4xjWZcZvZTTYZSqZRknRQO9um5cNFBy2b1Ow+synl2Vijo0lmb+61aQ4BNsEcMjZ5yiEonOgvgFsPox9aX5gArUorh46KAGV6q/52Buh2k5/qAWDqfvGaOZcNhtIDynJL/R1AyuYdLD8PGF1uWafHlp8HpMurBoqWX/pHyzLP7v8f8AItqJ4Z7RA2xgAAAABJRU5ErkJggg=="/>
+            </a>
+            <a href="@Url.Action("Cart")">
+                <img  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAfVJREFUSEvtlrFLHEEUxr93a2FuLrG1CiFCFFJo0HWbXNwpUuYgjYgI+R8sBCVVwFL0XxBJYSMIQpqE3VObu1uQFCEQkqC1gmBu1xS5ebJ7J+ye690ue0GLm26GN99v3vdmdh/hjgbdERepwZbFAyS8F8yYbB3aOT3JH83OUiNNEonBzExlx1sGYwnAUARCOGfQB6nnN5LCE4PtqrcF8EJHYeZ10ygsJoEnApcr9Xkm+hgIMk6IaFHl/u035wMmMa8BeBxMiV9LvfC5GzwR2K66vwA8hW8pNZ7JqUdnYWGrWh8m0E8AAoxD0xDFzOAvzt8RTTV8URDj/YwhVuNE7Yq7CsIKAMUiPySfU70TvGvGlnP5kpQ6CGxkvJGG2IsTLNfcEjN2W3G6NISTDVz7YxLnrGb9lJT6QztO0EoYd703krH1jQvkel+DevZ2/GaRHw/bHwHblcsiSDVva68H516ZxoOgZMF9idzOsF3AJhjHIDwh4F3zJbXW4g4VFxdeayvT7eBWYNLaxcV12nt/wVlKnSnjPjiNA32rw5/brs8pjbXtsX2r76HVzsUYKe17lrretldjbbRoDP6I/Tv5i3bV3QHwtpdwBm/L6cJcWPNG6+P3z5bjlTRgQqn0DX9EnOAr1ExdfGpPpGvP1cvMO2b8v0DtuldZ8IsuVxeyPAAAAABJRU5ErkJggg=="/>
+            </a>
+        </div>
+    }
+
+</header>
+
+<section class="hero-section">
+    <div class="hero-text">
+        <h1>Hunter&Fish</h1>
+        <p>Лучшее оборудование для охоты и рыбалки. Высококачественная продукция для ваших активных приключений.</p>
+        <a href="#" class="cta-button">Исследовать коллекцию</a>
+    </div>
+</section>
+
+<section class="featured-section">
+    <h2>Избранные Товары</h2>
+    <div class="featured-grid">
+        @foreach (var tovar in Model)
+        {
+            if (countProduct >= 4)
+            {
+                break;
+            }
+
+            <div class="featured-item">
+                @* <img src="@tovar.PictureProduct.Base64Cover" alt="Product Image" /> *@
+                <h3>@tovar.ProductName</h3>
+                <p>@tovar.Price Руб</p>
+                <a class="btn btn-outline-primary" href="@Url.Action("AddtoCart", new { id = tovar.ID_Product })">Купить</a>
+            </div>
+
+            countProduct++;
+        }
+    </div>
+</section>
+<footer>
+    <div class="footer-content">
+        <nav>
+            <ul class="footer-nav">
+                <li>
+                    <a href="#">Политика конфиденциальности</a>
+                </li>
+                <li>
+                    <a href="#">Условия использования</a>
+                </li>
+                <li>
+                    <a href="#">Контакты</a>
+                </li>
+            </ul>
+        </nav>
+        <p>© 2024 Hunter&Fish. Все права защищены.</p>
+    </div>
+</footer>
+</body>
+<script src="../wwwroot/js/site.js"></script>
+</html>

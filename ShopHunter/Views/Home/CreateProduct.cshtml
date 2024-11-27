@@ -1,0 +1,70 @@
+﻿@model ProductSite
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-8 mx-auto rounded border p-3">
+        <h2 class="text-center mb-5">Новый продукт</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Название</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="ProductName"/>
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Количество</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Quantity"/>
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Цена</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Price"/>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Picture_ID</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Picture_ID"/>
+                    <span asp-validation-for="Picture_ID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">CategoryProduct_ID</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="CategoryProduct_ID"/>
+                    <span asp-validation-for="CategoryProduct_ID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="offset-sm-4 col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Manager" role="button">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

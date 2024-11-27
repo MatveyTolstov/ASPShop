@@ -1,0 +1,53 @@
+﻿@model ShopHunter.Models.BDConn.UserSite
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-8 mx-auto rounded border p-3">
+        <h2 class="text-center mb-5">Изменение пользователя</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Логин</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Login"/>
+                    <span asp-validation-for="Login" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Пароль</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Password"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Roles_ID</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Roles_ID"/>
+                    <span asp-validation-for="Roles_ID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="offset-sm-4 col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Manager" role="button">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
